@@ -1,256 +1,445 @@
-* { 
-    margin: 0; 
-    padding: 0; 
-    box-sizing: border-box; 
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Nunito', sans-serif;
+  font-style: normal;
+}
+
+body::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+  linear-gradient(rgba(255,255,255,0.05) 1px, transparent .5px),
+  linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent .5px);
+  background-size: 55px 55px;
+  pointer-events: none;
+  z-index: 0;
 }
 
 body {
-    background-color: #7b2c87; /* Tu morado exacto */
-    width: 100vw; 
-    height: 100vh;
-    overflow: hidden; 
-    position: relative;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #7b2c87;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden; /* el fondo no scrollea */
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
 }
 
 /* =========================================
    1. BARRA BLANCA DEL LOGO
    ========================================= */
 .logo-barra {
-    position: absolute; 
-    top: 0; 
-    left: 0;
-    background-color: #ffffff;
-    width: 25vw; 
-    min-width: 220px; 
-    height: 110px; 
-    border-top-right-radius: 80px;
-    border-bottom-right-radius: 80px; 
-    z-index: 100;
-    box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
-
-    /* ALINEACIÓN EXACTA A LA DERECHA */
-    display: flex; 
-    justify-content: flex-end; /* Empuja el contenido a la derecha */
-    align-items: center;      
-    padding-right: 35px; /* Define qué tan pegado queda al borde derecho curvo */
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #ffffff;
+  width: 25vw;
+  min-width: 220px;
+  height: 110px;
+  border-top-right-radius: 80px;
+  border-bottom-right-radius: 80px;
+  z-index: 100;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 60px;
 }
 
-.logo-img {
-    height: 75px; /* Controlamos el tamaño solo por la altura */
-    width: auto;  /* IMPORTANTE: Permite que se pegue a la derecha sin ocupar todo el ancho */
+.logo-barra .LogoWiee{
+    height: 70px;
+    width: auto;
     object-fit: contain;
+    margin-left: 35px;
+
 }
+
+.logo-barra .LogoCompSoc{
+    height: 45px;
+    width: auto;
+    object-fit: contain;
+    margin-left: 50px;
+}
+
 
 /* =========================================
    2. CONTENEDOR DE MARCAS DE AGUA
    ========================================= */
-.fondo-wrapper { 
-    position: absolute; 
-    width: 100%; 
-    height: 100%; 
-    pointer-events: none; 
+.fondo-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
 
-/* --- ENGRANAJE IZQUIERDO (TAMAÑO Y CENTRADO PERFECTO) --- */
 .engranaje-izq {
-    position: absolute; 
-    left: 0; /* Lo ancla al borde izquierdo */
-    top: 50%; 
-    /* El -50% en el primer valor empuja exactamente la mitad de la tuerca hacia afuera de la pantalla */
-    transform: translate(-50%, -50%); 
-    height: 80vh; /* Tamaño basado en la altura, no se hará gigante en PC */
-    width: auto;
-    color: rgba(255, 255, 255, 0.08); /* Más sutil */
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  width: auto;
+  color: rgba(255, 255, 255, 0.08);
 }
 
-/* --- ÁTOMO ARRIBA DERECHA --- */
 .atomo-der {
-    position: absolute; 
-    right: 5vw;  
-    top: 8vh;    
-    width: 18vw; 
-    max-width: 220px;
-    color: rgba(255, 255, 255, 0.08); /* Más sutil */
+  position: absolute;
+  right: 5vw;
+  top: 8vh;
+  width: 18vw;
+  max-width: 220px;
+  color: rgba(255, 255, 255, 0.08);
 }
 
 /* =========================================
-   PLANO TÉCNICO DERECHO
+   4. FORMULARIO — CARD PRINCIPAL
    ========================================= */
-
-/* Línea vertical izquierda de la tuerca */
-.linea-vertical-principal {
-    position: absolute;
-    right: 25vw;
-    top: 0;
-    bottom: 0;
-    width: 1px;
-    background-color: rgba(255, 255, 255, 0.08);
+.form-card {
+  width: 100%;
+  max-width: 672px;
+  max-height: calc(100vh - 64px);
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 10;
 }
 
-/* --- CAJA DE LA TUERCA INFERIOR --- */
-.grupo-engranaje-der {
-    position: absolute;
-    right: 5vw;    
-    bottom: 10vh;  
-    width: 300px; 
-    height: 300px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* Header */
+.form-header {
+  border: 4px solid white;
+  background-color: #6B21A8;
+  padding: 20px 32px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  
 }
 
-/* Líneas que cruzan por el centro */
-.linea-cruz-h {
-    position: absolute;
-    width: 600px; 
-    height: 1px;
-    background-color: rgba(255, 255, 255, 0.08);
+.form-header-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
-.linea-cruz-v {
-    position: absolute;
-    height: 600px; 
-    width: 1px;
-    background-color: rgba(255, 255, 255, 0.08);
+.form-header-icon svg {
+  width: 24px;
+  height: 24px;
+  color: white;
 }
 
-/* Los 2 aros */
-.aro-exterior {
-    position: absolute;
-    width: 260px; 
-    height: 260px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 50%; 
+.form-header h1 {
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.2;
 }
 
-.aro-interior {
-    position: absolute;
-    width: 190px;
-    height: 190px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 50%;
+.form-header p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
 }
 
-/* Tuerca pequeña central */
-.tuerca-pequena {
-    position: absolute;
-    width: 110px; 
-    height: 110px;
-    color: rgba(255, 255, 255, 0.08);
+/* Body — scrolleable */
+.form-body {
+  overflow-y: auto;
+  flex: 1;
+  padding: 28px;
+  scrollbar-width: thin;
+  scrollbar-color: #d8b4fe transparent;
+}
+
+.form-body::-webkit-scrollbar {
+  width: 5px;
+}
+
+.form-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.form-body::-webkit-scrollbar-thumb {
+  background-color: #d8b4fe;
+  border-radius: 10px;
 }
 
 /* =========================================
-   RESPONSIVE (Para que en celular no se dañe)
+   5. SECCIONES DEL FORMULARIO
+   ========================================= */
+.section-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 26px 30px;
+  margin-bottom: 18px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.section-icon {
+  width: 32px;
+  height: 32px;
+  background: #f5eeff;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section-icon svg {
+  width: 16px;
+  height: 16px;
+  color: #6B21A8;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+/* =========================================
+   6. CAMPOS DEL FORMULARIO
+   ========================================= */
+.field-wrapper {
+  position: relative;
+  margin-bottom: 22px;
+}
+
+.field-wrapper.mb-0 {
+  margin-bottom: 0;
+}
+
+.field-label {
+  display: block;
+  font-size: 12px;
+  color: #9ca3af;
+  margin-bottom: 2px;
+  letter-spacing: 0.01em;
+}
+
+.req {
+  color: #6B21A8;
+  font-size: 12px;
+  margin-left: 2px;
+}
+
+.form-input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #d1d5db;
+  padding: 8px 0 5px 0;
+  font-size: 14px;
+  color: #111827;
+  background: transparent;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-input:focus {
+  border-bottom-color: #6B21A8;
+}
+
+.form-input::placeholder {
+  color: #6b7280;
+  font-size: 14px;
+  font-style: italic;
+}
+
+/* Grid de 2 columnas */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 24px;
+  margin-bottom: 16px;
+}
+
+/* =========================================
+   7. CHIPS (toggles de selección)
+   ========================================= */
+.chip-input {
+  display: none;
+}
+
+.chip-label {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 16px;
+  border-radius: 9999px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  color: #374151;
+  cursor: pointer;
+  background: white;
+  transition: all 0.15s;
+  user-select: none;
+}
+
+.chip-input:checked + .chip-label {
+  background-color: #6B21A8;
+  border-color: #6B21A8;
+  color: white;
+}
+
+.chip-label:hover {
+  border-color: #6B21A8;
+}
+
+/* =========================================
+   8. ÁREA DE UPLOAD / CHIPS CONTAINER
+   ========================================= */
+.upload-area {
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 16px 20px;
+  background: #fafafa;
+  margin-bottom: 16px;
+}
+
+.upload-area.mb-0 {
+  margin-bottom: 0;
+}
+
+.chips-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+/* Botón adjuntar archivo */
+.btn-upload {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #6B21A8;
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 8px;
+}
+
+.btn-upload:hover {
+  background-color: #5B1A90;
+}
+
+.btn-upload svg {
+  width: 14px;
+  height: 14px;
+}
+
+.cv-filename {
+  margin-left: 12px;
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+/* =========================================
+   9. BOTONES DE ACCIÓN
+   ========================================= */
+.form-actions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 12px;
+  padding-bottom: 8px;
+}
+
+.btn {
+  padding: 14px 40px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-family: 'Nunito', sans-serif;
+}
+
+.btn-secondary {
+  background-color: #374151;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #1f2937;
+}
+
+.btn-primary {
+  background-color: #6B21A8;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #5B1A90;
+}
+
+/* =========================================
+   10. RESPONSIVE
    ========================================= */
 @media (max-width: 768px) {
-    .logo-barra { 
-        width: 60vw; /* En celular ocupa más ancho para que quepa el logo */
-        padding-right: 20px;
-    }
-    .engranaje-izq { 
-        height: 60vh; 
-    }
-    .atomo-der { 
-        width: 30vw; 
-        right: 2vw;
-    }
-    .linea-vertical-principal {
-        right: 45vw;
-    }
-    .grupo-engranaje-der {
-        transform: scale(0.7); /* Achica el bloque técnico en móviles */
-        right: -5vw;
-        bottom: 0;
-    }
+  body {
+    padding: 16px;
+    overflow-y: auto;
+    height: auto;
+    align-items: flex-start;
+  }
 
-        @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+ 
 
-    * { font-family: 'Nunito', sans-serif; font-style: normal; box-sizing: border-box; }
+  .engranaje-izq {
+    height: 60vh;
+  }
 
-    /* Chip toggle styles */
-    .chip-input { display: none; }
-    .chip-label {
-      display: inline-flex;
-      align-items: center;
-      padding: 5px 16px;
-      border-radius: 9999px;
-      border: 1px solid #d1d5db;
-      font-size: 14px;
-      color: #374151;
-      cursor: pointer;
-      background: white;
-      transition: all 0.15s;
-      user-select: none;
-    }
-    .chip-input:checked + .chip-label {
-      background-color: #6B21A8;
-      border-color: #6B21A8;
-      color: white;
-    }
-    .chip-label:hover { border-color: #6B21A8; }
+  .atomo-der {
+    width: 30vw;
+    right: 2vw;
+  }
 
-    /* Input base styles */
-    .form-input {
-      width: 100%;
-      border: none;
-      border-bottom: 1px solid #d1d5db;
-      padding: 8px 0 5px 0;
-      font-size: 14px;
-      color: #111827;
-      background: transparent;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-    .form-input:focus { border-bottom-color: #6B21A8; }
-    .form-input::placeholder { color: #6b7280; font-size: 14px; font-style: italic; }
+  .linea-vertical-principal {
+    right: 45vw;
+  }
 
-    /* Section card */
-    .section-card {
-      background: white;
-      border: 1px solid #e5e7eb;
-      border-radius: 14px;
-      padding: 26px 30px;
-      margin-bottom: 18px;
-    }
+  .grupo-engranaje-der {
+    transform: scale(0.7);
+    right: -5vw;
+    bottom: 0;
+  }
 
-    /* File upload area */
-    .upload-area {
-      border: 1px solid #e5e7eb;
-      border-radius: 10px;
-      padding: 16px 20px;
-      background: #fafafa;
-    }
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
 
-    /* Required asterisk */
-    .req { color: #6B21A8; font-size: 12px; margin-left: 2px; }
+  .form-body {
+    padding: 16px;
+  }
 
-    /* Section header */
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 22px;
-    }
-    .section-icon {
-      width: 32px; height: 32px;
-      background: #f5eeff;
-      border-radius: 7px;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .section-title {
-      font-size: 16px;
-      font-weight: 600;
-      color: #1f2937;
-    }
-
-    /* Field wrapper */
-    .field-wrapper { position: relative; margin-bottom: 22px; }
-    .field-label {
-      display: block;
-      font-size: 12px;
-      color: #9ca3af;
-      margin-bottom: 2px;
-      letter-spacing: 0.01em;
-    }
+  .section-card {
+    padding: 20px 16px;
+  }
 }
