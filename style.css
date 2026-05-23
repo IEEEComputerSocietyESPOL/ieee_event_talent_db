@@ -23,8 +23,10 @@ body::before {
 body {
   background-color: #7b2c87;
   width: 100vw;
-  height: 100vh;
-  overflow: hidden; /* el fondo no scrollea */
+  min-height: 100vh;        
+  height: auto;             
+  overflow-y: auto;         
+  overflow-x: hidden;       
   position: relative;
   display: flex;
   align-items: center;
@@ -105,11 +107,11 @@ body {
 .form-card {
   width: 100%;
   max-width: 672px;
-  max-height: calc(100vh - 64px);
+  max-height: none;
   background: white;
   border-radius: 16px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
-  overflow: hidden;
+  overflow: visible;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -160,7 +162,7 @@ body {
 
 /* Body — scrolleable */
 .form-body {
-  overflow-y: auto;
+  overflow-y: visible;
   flex: 1;
   padding: 28px;
   scrollbar-width: thin;
