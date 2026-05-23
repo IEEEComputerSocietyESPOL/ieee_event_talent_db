@@ -1,0 +1,166 @@
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+
+body {
+    background-color: #7b2c87; /* Tu morado exacto */
+    width: 100vw; 
+    height: 100vh;
+    overflow: hidden; 
+    position: relative;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* =========================================
+   1. BARRA BLANCA DEL LOGO
+   ========================================= */
+.logo-barra {
+    position: absolute; 
+    top: 0; 
+    left: 0;
+    background-color: #ffffff;
+    width: 25vw; 
+    min-width: 220px; 
+    height: 110px; 
+    border-top-right-radius: 80px;
+    border-bottom-right-radius: 80px; 
+    z-index: 100;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+
+    /* ALINEACIÓN EXACTA A LA DERECHA */
+    display: flex; 
+    justify-content: flex-end; /* Empuja el contenido a la derecha */
+    align-items: center;      
+    padding-right: 35px; /* Define qué tan pegado queda al borde derecho curvo */
+}
+
+.logo-img {
+    height: 75px; /* Controlamos el tamaño solo por la altura */
+    width: auto;  /* IMPORTANTE: Permite que se pegue a la derecha sin ocupar todo el ancho */
+    object-fit: contain;
+}
+
+/* =========================================
+   2. CONTENEDOR DE MARCAS DE AGUA
+   ========================================= */
+.fondo-wrapper { 
+    position: absolute; 
+    width: 100%; 
+    height: 100%; 
+    pointer-events: none; 
+}
+
+/* --- ENGRANAJE IZQUIERDO (TAMAÑO Y CENTRADO PERFECTO) --- */
+.engranaje-izq {
+    position: absolute; 
+    left: 0; /* Lo ancla al borde izquierdo */
+    top: 50%; 
+    /* El -50% en el primer valor empuja exactamente la mitad de la tuerca hacia afuera de la pantalla */
+    transform: translate(-50%, -50%); 
+    height: 80vh; /* Tamaño basado en la altura, no se hará gigante en PC */
+    width: auto;
+    color: rgba(255, 255, 255, 0.08); /* Más sutil */
+}
+
+/* --- ÁTOMO ARRIBA DERECHA --- */
+.atomo-der {
+    position: absolute; 
+    right: 5vw;  
+    top: 8vh;    
+    width: 18vw; 
+    max-width: 220px;
+    color: rgba(255, 255, 255, 0.08); /* Más sutil */
+}
+
+/* =========================================
+   PLANO TÉCNICO DERECHO
+   ========================================= */
+
+/* Línea vertical izquierda de la tuerca */
+.linea-vertical-principal {
+    position: absolute;
+    right: 25vw;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* --- CAJA DE LA TUERCA INFERIOR --- */
+.grupo-engranaje-der {
+    position: absolute;
+    right: 5vw;    
+    bottom: 10vh;  
+    width: 300px; 
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Líneas que cruzan por el centro */
+.linea-cruz-h {
+    position: absolute;
+    width: 600px; 
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.linea-cruz-v {
+    position: absolute;
+    height: 600px; 
+    width: 1px;
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Los 2 aros */
+.aro-exterior {
+    position: absolute;
+    width: 260px; 
+    height: 260px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 50%; 
+}
+
+.aro-interior {
+    position: absolute;
+    width: 190px;
+    height: 190px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+}
+
+/* Tuerca pequeña central */
+.tuerca-pequena {
+    position: absolute;
+    width: 110px; 
+    height: 110px;
+    color: rgba(255, 255, 255, 0.08);
+}
+
+/* =========================================
+   RESPONSIVE (Para que en celular no se dañe)
+   ========================================= */
+@media (max-width: 768px) {
+    .logo-barra { 
+        width: 60vw; /* En celular ocupa más ancho para que quepa el logo */
+        padding-right: 20px;
+    }
+    .engranaje-izq { 
+        height: 60vh; 
+    }
+    .atomo-der { 
+        width: 30vw; 
+        right: 2vw;
+    }
+    .linea-vertical-principal {
+        right: 45vw;
+    }
+    .grupo-engranaje-der {
+        transform: scale(0.7); /* Achica el bloque técnico en móviles */
+        right: -5vw;
+        bottom: 0;
+    }
+}
