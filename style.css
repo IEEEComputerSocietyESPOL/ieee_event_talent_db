@@ -1,5 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
 
+@keyframes girarDer {
+  from{ transform: rotate(0deg); }
+  to{ transform: rotate(360deg); }
+  
+}
+
+@keyframes girarIzq {
+  from{ transform: rotate(360deg); }
+  to{ transform: rotate(0deg); }
+  
+}
+
 @media (max-height: 800px) {
   .form-header {
     padding: 14px 24px;
@@ -102,12 +114,30 @@ body {
 
 .engranaje-izq {
   position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  left: -15%;
+  top: 20%;
+  transform-origin: center center;
   height: 80vh;
   width: auto;
-  color: rgba(255, 255, 255, 0.08);
+  color: #853c91;
+  stroke-width: 0.15;
+  z-index: 5;
+  animation: girarDer 70s linear infinite;
+}
+
+.engranaje-der{
+  position: absolute;
+  left: 75%;
+  top: 30%;
+  transform-origin: center center;
+  height: 100vh;
+  width: auto;
+  stroke-width: 0.15;
+  color: #853c91;
+  rotate: 45deg;
+  z-index: 5;
+  animation: girarIzq 90s linear infinite;
+
 }
 
 .atomo-der {
@@ -133,7 +163,7 @@ body {
   display: flex;
   flex-direction: column;
   position: relative;
-  z-index: 10;
+  z-index: 100;
 }
 
 /* Header */
@@ -420,47 +450,4 @@ body {
   background-color: #5B1A90;
 }
 
-/* =========================================
-   10. RESPONSIVE
-   ========================================= */
-@media (max-width: 768px) {
-  body {
-    padding: 16px;
-    overflow-y: auto;
-    height: auto;
-    align-items: flex-start;
-  }
 
- 
-
-  .engranaje-izq {
-    height: 60vh;
-  }
-
-  .atomo-der {
-    width: 30vw;
-    right: 2vw;
-  }
-
-  .linea-vertical-principal {
-    right: 45vw;
-  }
-
-  .grupo-engranaje-der {
-    transform: scale(0.7);
-    right: -5vw;
-    bottom: 0;
-  }
-
-  .grid-2 {
-    grid-template-columns: 1fr;
-  }
-
-  .form-body {
-    padding: 16px;
-  }
-
-  .section-card {
-    padding: 20px 16px;
-  }
-}
