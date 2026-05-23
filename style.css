@@ -64,6 +64,11 @@ body {
   padding: 32px;
 }
 
+.estadoEnvio .textoSalida{
+  text-align: center;
+  
+}
+
 /* =========================================
    1. BARRA BLANCA DEL LOGO
    ========================================= */
@@ -136,7 +141,7 @@ body {
   color: #853c91;
   rotate: 45deg;
   z-index: 5;
-  animation: girarIzq 90s linear infinite;
+  animation: girarIzq 180s linear infinite;
 
 }
 
@@ -147,6 +152,7 @@ body {
   width: 18vw;
   max-width: 220px;
   color: rgba(255, 255, 255, 0.08);
+  animation: girarDer 300s linear infinite;
 }
 
 /* =========================================
@@ -296,7 +302,7 @@ body {
   margin-left: 2px;
 }
 
-.form-input {
+.form-input{
   width: 100%;
   border: none;
   border-bottom: 1px solid #d1d5db;
