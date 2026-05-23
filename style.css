@@ -54,15 +54,16 @@ body {
 }
 
 .logo-barra .LogoWiee{
-    height: 70px;
+    height: 95px;
     width: auto;
     object-fit: contain;
-    margin-left: 35px;
-
+    margin-right: -50px;
+    margin-left: -20px;
+    margin-bottom: 7px;
 }
 
 .logo-barra .LogoCompSoc{
-    height: 45px;
+    height: 70px;
     width: auto;
     object-fit: contain;
     margin-left: 50px;
