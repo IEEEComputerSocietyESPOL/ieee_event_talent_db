@@ -199,12 +199,9 @@
 
       <!-- Botones -->
       <div class="form-actions">
-        <button type="button" class="btn btn-secondary"
-          onclick="document.querySelectorAll('.form-input').forEach(i => i.value = '');
-                   document.querySelectorAll('.chip-input').forEach(c => c.checked = false);
-                   document.getElementById('cv-name').textContent = '';
-                   document.getElementById('cv-upload').value = '';">
-          Limpiar formulario
+        <button type="button" class="btn btn-secondary" onclick="limpiarFormulario()">
+        Limpiar formulario
+      </button>
         </button>
         <button type="button" class="btn btn-primary">
           Enviar datos
