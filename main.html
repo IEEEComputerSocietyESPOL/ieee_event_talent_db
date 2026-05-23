@@ -1,43 +1,109 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Fondo WIE ESPOL</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WIE | Registro estudiantil</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  //Falta dividir todo el código de aqui en componentes
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+    * { font-family: 'Nunito', sans-serif; font-style: normal; box-sizing: border-box; }
+
+    /* Chip toggle styles */
+    .chip-input { display: none; }
+    .chip-label {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 16px;
+      border-radius: 9999px;
+      border: 1px solid #d1d5db;
+      font-size: 14px;
+      color: #374151;
+      cursor: pointer;
+      background: white;
+      transition: all 0.15s;
+      user-select: none;
+    }
+    .chip-input:checked + .chip-label {
+      background-color: #6B21A8;
+      border-color: #6B21A8;
+      color: white;
+    }
+    .chip-label:hover { border-color: #6B21A8; }
+
+    /* Input base styles */
+    .form-input {
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid #d1d5db;
+      padding: 8px 0 5px 0;
+      font-size: 14px;
+      color: #111827;
+      background: transparent;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus { border-bottom-color: #6B21A8; }
+    .form-input::placeholder { color: #6b7280; font-size: 14px; font-style: italic; }
+
+    /* Section card */
+    .section-card {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      padding: 26px 30px;
+      margin-bottom: 18px;
+    }
+
+    /* File upload area */
+    .upload-area {
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 16px 20px;
+      background: #fafafa;
+    }
+
+    /* Required asterisk */
+    .req { color: #6B21A8; font-size: 12px; margin-left: 2px; }
+
+    /* Section header */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+    .section-icon {
+      width: 32px; height: 32px;
+      background: #f5eeff;
+      border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1f2937;
+    }
+
+    /* Field wrapper */
+    .field-wrapper { position: relative; margin-bottom: 22px; }
+    .field-label {
+      display: block;
+      font-size: 12px;
+      color: #9ca3af;
+      margin-bottom: 2px;
+      letter-spacing: 0.01em;
+    }
+  </style>
 </head>
 <body>
-    
-    <div class="logo-barra">
-        <img src="ieee_wie_purple_4c.webp" alt="Logo WIE ESPOL" class="logo-img">
-    </div>
 
-    <div class="fondo-wrapper">
-        
-        <svg class="engranaje-izq" viewBox="0 0 100 100" fill="currentColor">
-            <path d="M96.8 40.2l-9-2.2c-.8-3.3-2.1-6.4-3.7-9.4l5.6-7.3c1-1.3.8-3.2-.5-4.3L81 9.8c-1.3-1-3.2-.8-4.3.5l-5.6 7.3c-2.9-1.6-6-2.9-9.4-3.7l-2.2-9c-.4-1.6-1.8-2.7-3.4-2.7h-12c-1.6 0-3 1.1-3.4 2.7l-2.2 9c-3.3.8-6.4 2.1-9.4 3.7l-7.3-5.6c-1.3-1-3.2-.8-4.3.5L9.8 19c-1 1.3-.8 3.2.5 4.3l7.3 5.6c-1.6 2.9-2.9 6-3.7 9.4l-9 2.2c-1.6.4-2.7 1.8-2.7 3.4v12c0 1.6 1.1 3 2.7 3.4l9 2.2c.8 3.3 2.1 6.4 3.7 9.4l-5.6 7.3c-1 1.3-.8 3.2.5 4.3l8.2 7.2c1.3 1 3.2.8 4.3-.5l5.6-7.3c2.9 1.6 6 2.9 9.4 3.7l2.2 9c.4 1.6 1.8 2.7 3.4 2.7h12c1.6 0 3-1.1 3.4-2.7l2.2-9c3.3-.8 6.4-2.1 9.4-3.7l7.3 5.6c1.3 1 3.2.8 4.3-.5l8.2-7.2c1-1.3.8-3.2-.5-4.3l-7.3-5.6c1.6-2.9 2.9-6 3.7-9.4l9-2.2c1.6-.4 2.7-1.8 2.7-3.4v-12c.1-1.7-1-3.1-2.7-3.5zM50 69c-10.5 0-19-8.5-19-19s8.5-19 19-19 19 8.5 19 19-8.5 19-19 19z"/>
-        </svg>
+    <h1>Registro estudiantil</h1>
 
-        <svg class="atomo-der" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
-            <ellipse cx="50" cy="50" rx="44" ry="16" transform="rotate(-60 50 50)"/>
-            <ellipse cx="50" cy="50" rx="44" ry="16" transform="rotate(0 50 50)"/>
-            <ellipse cx="50" cy="50" rx="44" ry="16" transform="rotate(60 50 50)"/>
-            <circle cx="50" cy="50" r="7" fill="currentColor" stroke="none"/>
-        </svg>
 
-        <div class="linea-vertical-principal"></div>
 
-        <div class="grupo-engranaje-der">
-            <div class="linea-cruz-h"></div>
-            <div class="linea-cruz-v"></div>
-            
-            <div class="aro-exterior"></div>
-            <div class="aro-interior"></div>
-            <svg class="tuerca-pequena" viewBox="0 0 100 100" fill="currentColor">
-                <path d="M96.8 40.2l-9-2.2c-.8-3.3-2.1-6.4-3.7-9.4l5.6-7.3c1-1.3.8-3.2-.5-4.3L81 9.8c-1.3-1-3.2-.8-4.3.5l-5.6 7.3c-2.9-1.6-6-2.9-9.4-3.7l-2.2-9c-.4-1.6-1.8-2.7-3.4-2.7h-12c-1.6 0-3 1.1-3.4 2.7l-2.2 9c-3.3.8-6.4 2.1-9.4 3.7l-7.3-5.6c-1.3-1-3.2-.8-4.3.5L9.8 19c-1 1.3-.8 3.2.5 4.3l7.3 5.6c-1.6 2.9-2.9 6-3.7 9.4l-9 2.2c-1.6.4-2.7 1.8-2.7 3.4v12c0 1.6 1.1 3 2.7 3.4l9 2.2c.8 3.3 2.1 6.4 3.7 9.4l-5.6 7.3c-1 1.3-.8 3.2.5 4.3l8.2 7.2c1.3 1 3.2.8 4.3-.5l5.6-7.3c2.9 1.6 6 2.9 9.4 3.7l2.2 9c.4 1.6 1.8 2.7 3.4 2.7h12c1.6 0 3-1.1 3.4-2.7l2.2-9c3.3-.8 6.4-2.1 9.4-3.7l7.3 5.6c1.3 1 3.2.8 4.3-.5l8.2-7.2c1-1.3.8-3.2-.5-4.3l-7.3-5.6c1.6-2.9 2.9-6 3.7-9.4l9-2.2c1.6-.4 2.7-1.8 2.7-3.4v-12c.1-1.7-1-3.1-2.7-3.5zM50 69c-10.5 0-19-8.5-19-19s8.5-19 19-19 19 8.5 19 19-8.5 19-19 19z"/>
-            </svg>
-        </div>
-
-    </div>
+    <script src="script.js"></script>
 </body>
 </html>
