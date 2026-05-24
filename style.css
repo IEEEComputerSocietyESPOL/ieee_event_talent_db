@@ -70,6 +70,7 @@ body {
   padding: 130px 32px 32px 32px;
 }
 
+
 .estadoEnvio .textoSalida{
   text-align: center;
   
@@ -289,6 +290,11 @@ body {
 .field-wrapper {
   position: relative;
   margin-bottom: 22px;
+}
+
+
+.campo-sexo{
+    margin-top: 45px;
 }
 
 .field-wrapper.mb-0 {

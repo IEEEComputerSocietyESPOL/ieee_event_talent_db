@@ -115,6 +115,15 @@
             <label class="field-label">Ciudad de residencia <span class="req">*</span></label>
             <input type="text" placeholder="Ej. Guayaquil, Cuenca, etc." class="form-input ciudad">
           </div>
+
+          <div class="field-wrapper campo-sexo">
+            <label class="field-label">Sexo <span class="req">*</span></label>
+            <select class="form-input sexo">
+              <option value="" disabled selected>Seleccione una opción</option>
+              <option value="hombre">Hombre</option>
+              <option value="mujer">Mujer</option>
+            </select>
+          </div>
         </div>
       </div>
 
@@ -137,6 +146,17 @@
             <label class="field-label">Carrera <span class="req">*</span></label>
             <input type="text" placeholder="Ej. Computación, Mecatrónica, etc." class="form-input carrera">
           </div>
+          
+          <div class="field-wrapper">
+            <label class="field-label">
+              Universidad <span class="req">*</span>
+            </label>
+            <input
+              type="text"
+              placeholder="Ej. ESPOL, Universidad de Cuenca, UPS..."
+              class="form-input universidad">
+          </div>
+
           <div class="field-wrapper">
             <label class="field-label">Semestre que cursa <span class="req">*</span></label>
             <select class="form-input semestre">
@@ -171,10 +191,45 @@
             <span class="section-title">Datos profesionales</span>
           </div>
 
-<<<<<<< Updated upstream
+
         <div class="field-wrapper">
           <label class="field-label">Enlace al perfil de LinkedIn <span class="req">*</span></label>
           <input type="url" placeholder="URL a su perfil" class="form-input linkedin">
+        </div>
+        
+        <div class="field-wrapper">
+          <label class="field-label">
+            Enlace al portafolio GitHub (Opcional)
+          </label>
+
+          <input
+            type="url"
+            placeholder="https://github.com/usuario"
+            class="form-input github">
+        </div>
+        
+        <div class="field-wrapper">
+          <label class="field-label">
+            Nivel de inglés <span class="req">*</span>
+          </label>
+
+        <select class="form-input ingles">
+          <option value="" disabled selected>
+            Seleccione su nivel
+          </option>
+
+          <option value="basico">
+            Básico
+          </option>
+
+          <option value="intermedio">
+            Intermedio (B1 / B2)
+          </option>
+
+          <option value="avanzado">
+            Avanzado (C1 / C2)
+          </option>
+        </select>
         </div>
 
 
@@ -234,10 +289,30 @@
             <span id="cv-name" class="cv-filename"></span>
           </div>
 
+          <div style="margin-top:20px;">
+              <label style="display:flex; gap:10px; align-items:flex-start; cursor:pointer;">
+    
+                <input
+                  type="checkbox"
+                  id="acepta-datos"
+                  class="acepta-datos">
+
+                <span style="font-size:13px; color:#4b5563;">
+                  Autorizo el tratamiento de mis datos personales y profesionales
+                  para fines de reclutamiento, selección y contacto por parte de las
+                  empresas participantes en la feria laboral y sus áreas de Recursos
+                  Humanos.
+                  <span class="req">*</span>
+                </span>
+
+              </label>
+            </div>
+
+          
+
           <div class="estadoEnvio">
             <p class="textoSalida"></p>
           </div>
->>>>>>> Stashed changes
         </div>
       </div>
 

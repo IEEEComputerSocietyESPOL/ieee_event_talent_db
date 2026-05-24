@@ -63,6 +63,17 @@ function enviarFormulario() {
   salida.textContent = '✅ ¡Datos enviados correctamente!';
   salida.style.color = '#6B21A8';
   salida.style.fontWeight = '600';
+
+  if (errores.length > 0) {
+
+    alert(
+      errores.join("\n")
+  );
+
+    btnEnviar.textContent = "Enviar datos";
+
+  return;
+}
 }
 
 function limpiarFormulario() {
@@ -91,6 +102,20 @@ function validarDatos(datos) {
   if (datos.areas_interes.length === 0) errores.push("Selecciona al menos un área de interés.");
   if (datos.tipo_oportunidad.length === 0) errores.push("Selecciona al menos un tipo de oportunidad.");
   if (!datos.cv_file)         errores.push("Adjunta tu CV.");
+  if (!datos.sexo)            errores.push("Seleccione su sexo.");
+  if (!datos.universidad)     errores.push("La universidad es obligatoria.");
+  if (!datos.ingles)          errores.push("Seleccione su nivel de inglés.");
+  if (!datos.aceptaDatos)     errores.push("Debe aceptar el tratamiento de datos personales.");
+
+  //Validar Github solo si escribe algo
+  if (
+      datos.github &&
+      !datos.github.startsWith("https://github.com/")  
+  ) {
+    errores.push(
+    "El enlace de GitHub debe comenzar con https://github.com/"
+     );
+  }
  
   //validar email
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -108,15 +133,18 @@ function recuperarDatos(){
   const correo   = document.querySelector(".form-input.correo").value.trim();
   const telefono = document.querySelector(".form-input.telefono").value.trim();
   const ciudad = document.querySelector(".form-input.ciudad").value.trim();
+  const sexo = document.querySelector(".form-input.sexo").value;
 
   //academicos
   const carrera  = document.querySelector(".form-input.carrera").value.trim();
   const semestre = document.querySelector(".form-input.semestre").value.trim();
   const fecha_graduacion = document.querySelector(".form-input.fecha").value.trim();
+  const universidad = document.querySelector(".form-input.universidad").value.trim();
 
   //profesionales
-   const linkedin = document.querySelector(".form-input.linkedin").value.trim();
-
+  const linkedin = document.querySelector(".form-input.linkedin").value.trim();
+  const github = document.querySelector(".form-input.github").value.trim();
+  const ingles = document.querySelector(".form-input.ingles").value;
   // Checkboxes — áreas de interés (múltiple)
   const areas_interes = Array.from(
     document.querySelectorAll('input[name="areas"]:checked')
@@ -130,10 +158,30 @@ function recuperarDatos(){
   // Archivo CV
   const cvInput = document.getElementById("cv-upload");
   const cv_file = cvInput?.files?.[0] ?? null;
+  const aceptaDatos = document.getElementById("acepta-datos").checked;
 
   return{
-    nombre, apellido, telefono, correo, ciudad, carrera, semestre,
-     fecha_graduacion, linkedin, areas_interes, tipo_oportunidad, cv_file,
+    nombre,
+    apellido,
+    telefono,
+    correo,
+    ciudad,
+    sexo,
+
+    carrera,
+    universidad,
+    semestre,
+    fecha_graduacion,
+
+    linkedin,
+    github,
+    ingles,
+
+    areas_interes,
+    tipo_oportunidad,
+
+    cv_file,
+    aceptaDatos
     };
   }
 
