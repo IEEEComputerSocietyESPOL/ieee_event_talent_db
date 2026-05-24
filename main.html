@@ -153,7 +153,7 @@
 
         <div class="field-wrapper">
           <label class="field-label">Enlace al perfil de LinkedIn <span class="req">*</span></label>
-          <input type="url" placeholder="URL al su perfil" class="form-input linkedin">
+          <input type="url" placeholder="URL a su perfil" class="form-input linkedin">
         </div>
 
 
@@ -179,8 +179,12 @@
             <input class="chip-input" type="checkbox" id="area-log" name="areas" value="logistica">
             <label class="chip-label" for="area-log">Logística</label>
 
-            <input class="chip-input" type="checkbox" id="area-otro" name="areas" value="otro">
+            <input class="chip-input" type="checkbox" id="area-otro" name="areas" value="otro" onchange="toggleOtroInput(this)">
             <label class="chip-label" for="area-otro">Otro</label>
+          </div>
+          <div class="otro-input-wrapper" id="otro-input-wrapper">
+            <input type="text" class="form-input" id="area-otro-texto"
+                  placeholder="¿Cuál es tu área de interés?">
           </div>
         </div>
 

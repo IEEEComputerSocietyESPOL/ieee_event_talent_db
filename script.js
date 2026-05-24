@@ -39,7 +39,7 @@ function validarDatos(datos) {
 //recuperar referencias textos
 function recuperarDatos(){
   const nombre = document.querySelector(".form-input.nombre").value.trim();
-  const apellido = document.querySelector(".form-input.correo").value.trim();
+  const apellido = document.querySelector(".form-input.apellido").value.trim();
   const correo   = document.querySelector(".form-input.correo").value.trim();
   const telefono = document.querySelector(".form-input.telefono").value.trim();
   const ciudad = document.querySelector(".form-input.ciudad").value.trim();
@@ -80,3 +80,15 @@ function recuperarDatos(){
     btnEnviar.textContent = "enviando..."
 
   }
+
+function toggleOtroInput(checkbox) {
+  const wrapper = document.getElementById('otro-input-wrapper');
+  const input   = document.getElementById('area-otro-texto');
+  if (checkbox.checked) {
+    wrapper.classList.add('visible');
+    input.focus();
+  } else {
+    wrapper.classList.remove('visible');
+    input.value = '';
+  }
+}
