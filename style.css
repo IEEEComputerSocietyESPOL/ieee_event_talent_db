@@ -315,6 +315,17 @@ body {
   margin-left: 2px;
 }
 
+
+.texto-consentimiento{
+    display: block;
+    max-width: 500px;   /* ancho máximo del texto */
+    margin: 0 auto;     /* centra el bloque horizontalmente */
+    text-align: left; /* centra cada línea */
+    font-size: 13px;
+    color: #4b5563;
+    line-height: 1.5;
+}
+
 .form-input{
   width: 100%;
   border: none;
