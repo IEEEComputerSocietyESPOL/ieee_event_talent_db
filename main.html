@@ -174,7 +174,7 @@
 <<<<<<< Updated upstream
         <div class="field-wrapper">
           <label class="field-label">Enlace al perfil de LinkedIn <span class="req">*</span></label>
-          <input type="url" placeholder="URL al su perfil" class="form-input linkedin">
+          <input type="url" placeholder="URL a su perfil" class="form-input linkedin">
         </div>
 
 
@@ -200,37 +200,14 @@
             <input class="chip-input" type="checkbox" id="area-log" name="areas" value="logistica">
             <label class="chip-label" for="area-log">Logística</label>
 
-            <input class="chip-input" type="checkbox" id="area-otro" name="areas" value="otro">
+            <input class="chip-input" type="checkbox" id="area-otro" name="areas" value="otro" onchange="toggleOtroInput(this)">
             <label class="chip-label" for="area-otro">Otro</label>
           </div>
-=======
-          <div class="field-wrapper">
-            <label class="field-label">Enlace al perfil de LinkedIn <span class="req">*</span></label>
-            <input type="url" placeholder="URL a su perfil" class="form-input linkedin">
+          <div class="otro-input-wrapper" id="otro-input-wrapper">
+            <input type="text" class="form-input" id="area-otro-texto"
+                  placeholder="¿Cuál es tu área de interés?">
           </div>
-
-          <div class="upload-area">
-            <label class="field-label">Áreas de interés <span class="req">*</span></label>
-            <div class="chips-group">
-              <input class="chip-input" type="checkbox" id="area-sw" name="areas" value="software">
-              <label class="chip-label" for="area-sw">Software/dev</label>
-              <input class="chip-input" type="checkbox" id="area-data" name="areas" value="data">
-              <label class="chip-label" for="area-data">Data/IA</label>
-              <input class="chip-input" type="checkbox" id="area-elec" name="areas" value="electronica">
-              <label class="chip-label" for="area-elec">Electrónica</label>
-              <input class="chip-input" type="checkbox" id="area-redes" name="areas" value="redes">
-              <label class="chip-label" for="area-redes">Redes/telecom</label>
-              <input class="chip-input" type="checkbox" id="area-gti" name="areas" value="gestionti">
-              <label class="chip-label" for="area-gti">Gestión TI</label>
-              <input class="chip-input" type="checkbox" id="area-log" name="areas" value="logistica">
-              <label class="chip-label" for="area-log">Logística</label>
-              <input class="chip-input" type="checkbox" id="area-otro" name="areas" value="otro" onchange="toggleOtroInput(this)">
-              <label class="chip-label" for="area-otro">Otro</label>
-            </div>
-            <div class="otro-input-wrapper" id="otro-input-wrapper">
-              <input type="text" class="form-input" id="area-otro-texto" placeholder="¿Cuál es tu área de interés?">
-            </div>
-          </div>
+        </div>
 
           <div class="upload-area">
             <label class="field-label">Tipo de oportunidad buscada <span class="req">*</span></label>
