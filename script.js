@@ -5,203 +5,261 @@ function updateSteps(direction) {
   const prev = currentStep;
   currentStep += direction;
 
-  // Update panels
-  document.getElementById('panel-' + prev).classList.remove('visible');
-  document.getElementById('panel-' + currentStep).classList.add('visible');
+  document.getElementById("panel-" + prev).classList.remove("visible");
+  document.getElementById("panel-" + currentStep).classList.add("visible");
 
-  // Update step indicators
-  const prevItem = document.getElementById('si-' + prev);
-  const currItem = document.getElementById('si-' + currentStep);
+  const prevItem = document.getElementById("si-" + prev);
+  const currItem = document.getElementById("si-" + currentStep);
 
-  prevItem.classList.remove('active');
-  currItem.classList.remove('done');
-  currItem.classList.add('active');
+  prevItem.classList.remove("active");
+  currItem.classList.remove("done");
+  currItem.classList.add("active");
 
   if (direction > 0) {
-    prevItem.classList.add('done');
-    document.getElementById('sc-' + prev).innerHTML = `
+    prevItem.classList.add("done");
+
+    document.getElementById("sc-" + prev).innerHTML = `
       <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width:16px;height:16px">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
-      </svg>`;
+      </svg>
+    `;
   } else {
-    prevItem.classList.remove('done');
-    document.getElementById('sc-' + prev).textContent = prev;
+    prevItem.classList.remove("done");
+    document.getElementById("sc-" + prev).textContent = prev;
   }
 
-  // Update counter
-  document.getElementById('step-counter').textContent = 'Paso ' + currentStep + ' de ' + totalSteps;
+  document.getElementById("step-counter").textContent =
+    "Paso " + currentStep + " de " + totalSteps;
 
-  // Update buttons
-  const backBtn = document.getElementById('btn-back');
-  const nextBtn = document.getElementById('btn-next');
+  const backBtn = document.getElementById("btn-back");
+  const nextBtn = document.getElementById("btn-next");
 
   backBtn.disabled = currentStep === 1;
 
   if (currentStep === totalSteps) {
-    nextBtn.textContent = 'Enviar datos';
-    nextBtn.classList.add('btn-enviar');
+    nextBtn.textContent = "Enviar datos";
   } else {
-    nextBtn.textContent = 'Siguiente →';
-    nextBtn.classList.remove('btn-enviar');
+    nextBtn.textContent = "Siguiente →";
   }
+}
+
+function validarPaso1() {
+  const nombre = document.querySelector(".nombre").value.trim();
+  const apellido = document.querySelector(".apellido").value.trim();
+  const correo = document.querySelector(".correo").value.trim();
+  const telefono = document.querySelector(".telefono").value.trim();
+  const ciudad = document.querySelector(".ciudad").value.trim();
+  const sexo = document.querySelector(".sexo").value;
+
+  if (
+    !nombre ||
+    !apellido ||
+    !correo ||
+    !telefono ||
+    !ciudad ||
+    !sexo
+  ) {
+    alert("Debe completar todos los campos del Paso 1 para continuar.");
+    return false;
+  }
+
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+  if (!emailRegex.test(correo)) {
+    alert("Ingrese un correo electrónico válido.");
+    return false;
+  }
+
+  return true;
+}
+
+function validarPaso2() {
+  const carrera = document.querySelector(".carrera").value.trim();
+  const universidad = document.querySelector(".universidad").value.trim();
+  const semestre = document.querySelector(".semestre").value;
+  const fecha = document.querySelector(".fecha").value;
+
+  if (
+    !carrera ||
+    !universidad ||
+    !semestre ||
+    !fecha
+  ) {
+    alert("Debe completar todos los campos del Paso 2 para continuar.");
+    return false;
+  }
+
+  return true;
+}
+
+function validarPaso3() {
+  const linkedin = document.querySelector(".linkedin").value.trim();
+  const github = document.querySelector(".github").value.trim();
+  const ingles = document.querySelector(".ingles").value;
+
+  const areasInteres = document.querySelectorAll(
+    'input[name="areas"]:checked'
+  );
+
+  const oportunidades = document.querySelectorAll(
+    'input[name="oportunidad"]:checked'
+  );
+
+  const cv = document.getElementById("cv-upload").files[0];
+  const aceptaDatos = document.getElementById("acepta-datos").checked;
+
+  if (
+    !linkedin ||
+    !ingles ||
+    areasInteres.length === 0 ||
+    oportunidades.length === 0 ||
+    !cv ||
+    !aceptaDatos
+  ) {
+    alert("Debe completar todos los campos obligatorios del Paso 3.");
+    return false;
+  }
+
+  if (
+    github &&
+    !github.startsWith("https://github.com/")
+  ) {
+    alert(
+      "El enlace de GitHub debe comenzar con https://github.com/"
+    );
+    return false;
+  }
+
+  return true;
 }
 
 function goNext() {
-  if (currentStep === totalSteps) {
+  if (currentStep === 1) {
+    if (!validarPaso1()) return;
+  }
+
+  if (currentStep === 2) {
+    if (!validarPaso2()) return;
+  }
+
+  if (currentStep === 3) {
     enviarFormulario();
     return;
   }
-  if (currentStep < totalSteps) updateSteps(1);
+
+  updateSteps(1);
 }
 
 function goBack() {
-  if (currentStep > 1) updateSteps(-1);
-}
-
-function enviarFormulario() {
-  const salida = document.querySelector('.textoSalida');
-  salida.textContent = '✅ ¡Datos enviados correctamente!';
-  salida.style.color = '#6B21A8';
-  salida.style.fontWeight = '600';
-
-  if (errores.length > 0) {
-
-    alert(
-      errores.join("\n")
-  );
-
-    btnEnviar.textContent = "Enviar datos";
-
-  return;
-}
-}
-
-function limpiarFormulario() {
-  document.querySelectorAll('.form-input').forEach(el => {
-    if (el.tagName === 'SELECT') el.selectedIndex = 0;
-    else el.value = '';
-  });
-  document.querySelectorAll('.chip-input').forEach(el => el.checked = false);
-  document.getElementById('otro-input-wrapper').classList.remove('visible');
-  document.getElementById('cv-name').textContent = '';
-
-  alert("limpiado")
-}
-
-function validarDatos(datos) {
-  const errores = [];
-  if (!datos.nombre)          errores.push("El nombre es obligatorio.");
-  if (!datos.apellido)        errores.push("El apellido es obligatorio.");
-  if (!datos.correo)          errores.push("El correo electrónico es obligatorio.");
-  if (!datos.telefono)        errores.push("El teléfono es obligatorio.");
-  if (!datos.ciudad)          errores.push("La ciudad de residencia es obligatoria.");
-  if (!datos.carrera)         errores.push("La carrera es obligatoria.");
-  if (!datos.semestre)        errores.push("El semestre es obligatorio.");
-  if (!datos.fecha_graduacion) errores.push("La fecha estimada de graduación es obligatoria.");
-  if (!datos.linkedin)        errores.push("El perfil de LinkedIn es obligatorio.");
-  if (datos.areas_interes.length === 0) errores.push("Selecciona al menos un área de interés.");
-  if (datos.tipo_oportunidad.length === 0) errores.push("Selecciona al menos un tipo de oportunidad.");
-  if (!datos.cv_file)         errores.push("Adjunta tu CV.");
-  if (!datos.sexo)            errores.push("Seleccione su sexo.");
-  if (!datos.universidad)     errores.push("La universidad es obligatoria.");
-  if (!datos.ingles)          errores.push("Seleccione su nivel de inglés.");
-  if (!datos.aceptaDatos)     errores.push("Debe aceptar el tratamiento de datos personales.");
-
-  //Validar Github solo si escribe algo
-  if (
-      datos.github &&
-      !datos.github.startsWith("https://github.com/")  
-  ) {
-    errores.push(
-    "El enlace de GitHub debe comenzar con https://github.com/"
-     );
+  if (currentStep > 1) {
+    updateSteps(-1);
   }
- 
-  //validar email
-  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  if (datos.correo && !emailRegex.test(datos.correo)) {
-    errores.push("El correo electrónico no tiene un formato válido.");
-  }
- 
-  return errores;
 }
 
-//recuperar referencias textos
-function recuperarDatos(){
-  const nombre = document.querySelector(".form-input.nombre").value.trim();
-  const apellido = document.querySelector(".form-input.apellido").value.trim();
-  const correo   = document.querySelector(".form-input.correo").value.trim();
-  const telefono = document.querySelector(".form-input.telefono").value.trim();
-  const ciudad = document.querySelector(".form-input.ciudad").value.trim();
-  const sexo = document.querySelector(".form-input.sexo").value;
+function recuperarDatos() {
+  const nombre = document.querySelector(".nombre").value.trim();
+  const apellido = document.querySelector(".apellido").value.trim();
+  const correo = document.querySelector(".correo").value.trim();
+  const telefono = document.querySelector(".telefono").value.trim();
+  const ciudad = document.querySelector(".ciudad").value.trim();
+  const sexo = document.querySelector(".sexo").value;
 
-  //academicos
-  const carrera  = document.querySelector(".form-input.carrera").value.trim();
-  const semestre = document.querySelector(".form-input.semestre").value.trim();
-  const fecha_graduacion = document.querySelector(".form-input.fecha").value.trim();
-  const universidad = document.querySelector(".form-input.universidad").value.trim();
+  const carrera = document.querySelector(".carrera").value.trim();
+  const universidad = document.querySelector(".universidad").value.trim();
+  const semestre = document.querySelector(".semestre").value;
+  const fecha_graduacion = document.querySelector(".fecha").value;
 
-  //profesionales
-  const linkedin = document.querySelector(".form-input.linkedin").value.trim();
-  const github = document.querySelector(".form-input.github").value.trim();
-  const ingles = document.querySelector(".form-input.ingles").value;
-  // Checkboxes — áreas de interés (múltiple)
+  const linkedin = document.querySelector(".linkedin").value.trim();
+  const github = document.querySelector(".github").value.trim();
+  const ingles = document.querySelector(".ingles").value;
+
   const areas_interes = Array.from(
     document.querySelectorAll('input[name="areas"]:checked')
   ).map(cb => cb.value);
- 
-  // Checkboxes — tipo de oportunidad (múltiple)
+
   const tipo_oportunidad = Array.from(
     document.querySelectorAll('input[name="oportunidad"]:checked')
   ).map(cb => cb.value);
- 
-  // Archivo CV
-  const cvInput = document.getElementById("cv-upload");
-  const cv_file = cvInput?.files?.[0] ?? null;
-  const aceptaDatos = document.getElementById("acepta-datos").checked;
 
-  return{
+  const cvInput = document.getElementById("cv-upload");
+  const cv_file = cvInput.files[0] || null;
+
+  const aceptaDatos =
+    document.getElementById("acepta-datos").checked;
+
+  return {
     nombre,
     apellido,
-    telefono,
     correo,
+    telefono,
     ciudad,
     sexo,
-
     carrera,
     universidad,
     semestre,
     fecha_graduacion,
-
     linkedin,
     github,
     ingles,
-
     areas_interes,
     tipo_oportunidad,
-
     cv_file,
     aceptaDatos
-    };
-  }
+  };
+}
 
-  async function enviarFormulario(){
-    const datos = recuperarDatos();
-    const errores = validarDatos(datos);
+async function enviarFormulario() {
+  if (!validarPaso3()) return;
 
-    const btnEnviar = document.querySelector(".btn-primary");
-    btnEnviar.textContent = "enviando..."
+  const datos = recuperarDatos();
 
-  }
+  console.log(datos);
+
+  const salida = document.querySelector(".textoSalida");
+
+  salida.textContent =
+    "✅ ¡Datos enviados correctamente!";
+
+  salida.style.color = "#6B21A8";
+  salida.style.fontWeight = "600";
+}
+
+function limpiarFormulario() {
+  document.querySelectorAll(".form-input").forEach(el => {
+    if (el.tagName === "SELECT") {
+      el.selectedIndex = 0;
+    } else {
+      el.value = "";
+    }
+  });
+
+  document.querySelectorAll(".chip-input").forEach(el => {
+    el.checked = false;
+  });
+
+  document.getElementById("acepta-datos").checked = false;
+
+  document
+    .getElementById("otro-input-wrapper")
+    .classList.remove("visible");
+
+  document.getElementById("cv-name").textContent = "";
+}
 
 function toggleOtroInput(checkbox) {
-  const wrapper = document.getElementById('otro-input-wrapper');
-  const input   = document.getElementById('area-otro-texto');
+  const wrapper = document.getElementById(
+    "otro-input-wrapper"
+  );
+
+  const input = document.getElementById(
+    "area-otro-texto"
+  );
+
   if (checkbox.checked) {
-    wrapper.classList.add('visible');
+    wrapper.classList.add("visible");
     input.focus();
   } else {
-    wrapper.classList.remove('visible');
-    input.value = '';
+    wrapper.classList.remove("visible");
+    input.value = "";
   }
 }
