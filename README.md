@@ -1,43 +1,154 @@
-# 🚀 Proyecto: Portal de Registro de Talentos - WIE Week
+# 🚀 Sistema de Registro de Talentos - WIE Week ESPOL
 
-Este proyecto consiste en el desarrollo de una plataforma web construida en **Django** para el registro de talentos. El objetivo principal es recopilar perfiles profesionales (datos personales, LinkedIn, CV, etc.) para ofrecerlos a los sponsors de la WIE Week. Además, incluye un panel de administración intuitivo y preconfigurado para que las organizadoras del evento puedan gestionar la base de datos de forma sencilla y sin necesidad de conocimientos técnicos.
+¡Bienvenido al repositorio oficial del **Sistema de Registro de Talentos** desarrollado para la **WIE Week** en colaboración con el **IEEE Computer Society ESPOL Student Chapter**!
 
----
-
-## 👥 División de Equipos y Roles
-
-Para avanzar en paralelo y garantizar que las 8 personas del equipo aporten significativamente, nos dividiremos en los siguientes micro-equipos de trabajo:
-
-### 🎨 Equipo Frontend: Interfaz y Maquetación (3 Personas)
-*   **Integrantes:** Diseñador del Mockup + 2 Desarrolladores Frontend.
-*   **Misión:** Traducir el diseño visual a plantillas de Django (`templates/`).
-*   **Responsabilidades:**
-    *   **Líder de UI (Creador del Mockup):** Guiar al equipo explicando la estructura visual, asegurar fidelidad con el diseño original y garantizar que la interfaz sea 100% responsivo (adaptable a celulares y computadoras).
-    *   **Desarrolladores Frontend (2):** Apoyar en la maquetación HTML/CSS (usando Bootstrap o Tailwind) de la página de registro, la pantalla de "Éxito al registrarse" y la integración de estilos globales.
-
-### 🗄️ Equipo Backend A: Base de Datos y Panel Admin (2 Personas)
-*   **Misión:** Crear los cimientos de la plataforma en Django y preparar la gestión de datos.
-*   **Responsabilidades:**
-    *   Escribir el modelo de la base de datos en `models.py` con todos los campos necesarios (Nombres, Correo, LinkedIn, CV en PDF, Carrera, etc.).
-    *   Configurar y personalizar el **Panel de Administración** de Django en `admin.py` incluyendo barras de búsqueda, vistas de tablas legibles y filtros por carrera para facilitar el uso a las organizadoras de la WIE Week.
-    *   Gestionar las migraciones de la base de datos (`makemigrations` y `migrate`) y dar de alta el primer *superuser*.
-
-### 🔌 Equipo Backend B: Lógica, Formularios y Despliegue (2 Personas)
-*   **Misión:** Conectar la interfaz con el servidor, validar datos y subir la aplicación a internet.
-*   **Responsabilidades:**
-    *   Crear el formulario de Django en `forms.py` y conectarlo con las vistas (`views.py`) para procesar el envío de datos y gestionar la subida de archivos (guardar los PDFs de los CVs).
-    *   Implementar validaciones de seguridad y formato (por ejemplo, asegurar que el enlace de LinkedIn sea una URL válida que empiece por `https://linkedin.com/`).
-    *   Configurar el entorno inicial del proyecto (Git, `.gitignore`, `requirements.txt`) y, en la fase final, encargarse del despliegue a producción (en plataformas como Render o Railway) para que el sitio sea público.
+Este sistema web interactivo por pasos (Multi-step Form) permite a los estudiantes registrar sus perfiles profesionales, áreas de interés técnico, enlaces de LinkedIn/GitHub y adjuntar su CV en formato PDF. El backend está construido sobre **Django**, procesando las solicitudes de forma asíncrona mediante **AJAX (Fetch API)** para garantizar una experiencia de usuario rápida, fluida y segura.
 
 ---
 
-## 💡 Flujo de Trabajo para el Desarrollo
+## 📋 Requisitos Previos
 
-Para evitar conflictos en Git y trabajar de manera eficiente, seguiremos este orden:
+Antes de levantar el proyecto, asegúrate de tener instalado lo siguiente en tu máquina local:
 
-1.  **Paso 1 (Configuración Inicial - Backend B):** Se creará el repositorio de GitHub con un proyecto de Django limpio, el entorno virtual base y el archivo `.gitignore`. Una vez subido, todos los integrantes clonarán el proyecto.
-2.  **Paso 2 (Desarrollo en Paralelo - Backend A y Frontend):** 
-    *   Mientras el **Equipo Backend A** define los modelos y activa el panel de administración.
-    *   El **Equipo Frontend** maquetará las vistas en HTML puro basándose estrictamente en el Mockup aprobado.
-3.  **Paso 3 (Integración - Backend B y Frontend):** El **Equipo Backend B** tomará los archivos HTML del equipo de Frontend, los transformará en plantillas de Django, los conectará a la lógica de las vistas y habilitará el guardado de datos en la BD.
-4.  **Paso 4 (Pruebas y Despliegue):** Se testeará el flujo completo junto a las organizadoras de la WIE Week en el panel de administración y se realizará el despliegue final a producción.
+- **Python 3.10 o superior**
+- **Git**
+- Un editor de código (recomendado **VS Code**)
+
+---
+
+## 🛠️ Instrucciones de Instalación y Configuración Local
+
+Sigue estos pasos en orden exacto desde tu terminal para clonar, configurar y ejecutar el proyecto en tu entorno de desarrollo.
+
+### 1. Clonar el Repositorio
+
+Descarga el proyecto desde GitHub y muévete al directorio raíz:
+
+```bash
+git clone https://github.com/[tu-usuario]/ieee_event_talent_db.git
+cd ieee_event_talent_db
+```
+
+> **Nota:** Asegúrate de estar parado en la carpeta raíz donde se encuentra el archivo `manage.py`.
+
+---
+
+### 2. Crear y Activar el Entorno Virtual
+
+Crea un entorno virtual de Python llamado `env` para mantener las dependencias aisladas:
+
+**En Windows (PowerShell / CMD):**
+
+```powershell
+python -m venv env
+.\env\Scripts\Activate.ps1
+```
+
+> Si PowerShell muestra un error de ejecución de scripts, usa: `.\env\Scripts\activate.bat`
+
+**En macOS / Linux:**
+
+```bash
+python3 -m venv env
+source env/bin/activate
+```
+
+Al activarlo, tu terminal mostrará el prefijo `(env)`.
+
+---
+
+### 3. Instalar las Dependencias
+
+Con el entorno virtual activo, instala todas las librerías necesarias:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+### 4. Construir la Base de Datos (Migraciones)
+
+Genera el archivo local SQLite y construye la estructura de tablas del sistema:
+
+```bash
+python manage.py makemigrations talents
+python manage.py migrate
+```
+
+---
+
+### 5. Crear el Usuario Administrador (Superuser)
+
+Para acceder al panel de control, gestionar registros y descargar datos:
+
+```bash
+python manage.py createsuperuser
+```
+
+La terminal te pedirá un nombre de usuario, correo electrónico y contraseña. Los caracteres de la contraseña no se mostrarán en pantalla; escríbela con confianza y presiona **Enter**.
+
+---
+
+## 🌟 Configuración Obligatoria del Panel Administrativo
+
+> ⚠️ La base de datos se inicializa completamente vacía. Es **mandatorio** poblar los catálogos antes del primer registro de prueba para evitar errores de integridad de datos.
+
+1. Inicia el servidor local:
+   ```bash
+   python manage.py runserver
+   ```
+
+2. Abre el panel de administración: [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/)
+
+3. Inicia sesión con las credenciales del Superuser creado anteriormente.
+
+4. En la sección **Talents**, agrega los siguientes registros **en el orden exacto indicado**:
+
+**Tabla "Áreas de Interés" (`AreaInteres`) — 6 opciones:**
+
+| # | Nombre |
+|---|--------|
+| 1 | Inteligencia Artificial |
+| 2 | Desarrollo Web |
+| 3 | Desarrollo Mobile |
+| 4 | Data Science |
+| 5 | Ciberseguridad |
+| 6 | Otro |
+
+**Tabla "Tipos de Oportunidades" (`TipoOportunidad`) — 3 opciones:**
+
+| # | Nombre |
+|---|--------|
+| 1 | Pasantías |
+| 2 | Trabajo medio tiempo |
+| 3 | Jornada completa |
+
+---
+
+## 🚀 Ejecutar el Proyecto en Desarrollo
+
+Una vez completada la configuración de los catálogos, el sistema está **100% operativo**.
+
+1. Inicia el servidor (si lo detuviste):
+   ```bash
+   python manage.py runserver
+   ```
+
+2. Abre el formulario en tu navegador:
+   👉 [http://127.0.0.1:8000/registro/](http://127.0.0.1:8000/registro/)
+
+3. Llena los datos, selecciona tus áreas de interés, adjunta un CV en PDF y presiona **"Enviar datos"**. Verás la barra de carga, el mensaje personalizado y la redirección automática a la pantalla de éxito.
+
+---
+
+## ⚙️ Estructura del Proyecto (Módulos Críticos)
+
+| Archivo | Descripción |
+|---------|-------------|
+| `talents/models.py` | Define la estructura relacional de Talentos, Áreas de Interés y Oportunidades. Maneja la carga segura de archivos organizados por fecha (`upload_to='cvs/%Y/%m/%d/'`), compatible con Windows. |
+| `talents/forms.py` | Contiene las reglas estrictas de validación de negocio en el backend (limpieza y verificación de URLs de LinkedIn y GitHub). |
+| `talents/views.py` | Procesa el flujo asíncrono asimilando objetos `FormData` (textos + archivos binarios) y retorna respuestas estructuradas en `JsonResponse`. |
+| `talents/static/talents/script.js` | Orquesta las validaciones del cliente, gestiona los estados de los pasos del formulario (Paso 1, 2 y 3), renderiza el nombre del PDF cargado y ejecuta la petición asíncrona al servidor. |
+
+---
