@@ -36,14 +36,14 @@ class TalentRegistrationForm(forms.ModelForm):
     
     def clean_linkedin_url(self):
         url = self.cleaned_data.get('linkedin_url')
-        if url and not url.startswith('https://linkedin.com/'):
-            raise ValidationError('El enlace debe comenzar con https://linkedin.com/')
+        if url and not (url.startswith('https://linkedin.com/') or url.startswith('https://www.linkedin.com/')):
+            raise ValidationError('El enlace debe comenzar con https://linkedin.com/ o https://www.linkedin.com/')
         return url
-    
+
     def clean_github_url(self):
         url = self.cleaned_data.get('github_url')
-        if url and not url.starswith('https://github.com/'):
-            raise ValidationError('El enlace debe comenzar con https://github.com/')
+        if url and not (url.startswith('https://github.com/') or url.startswith('https://www.github.com/')):
+            raise ValidationError('El enlace debe comenzar con https://github.com/ o https://www.github.com/')
         return url
     
     def clean_telefono(self):

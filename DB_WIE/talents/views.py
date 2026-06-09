@@ -37,63 +37,37 @@ def registro(request):
         })
 
 def procesar_registro_ajax(request):
-    """Procesa el registro mediante AJAX"""
+    """Procesa el registro mediante AJAX/FormData de forma compatible con archivos"""
     try:
-        data = json.loads(request.body)
-
-        #Validar datos
-        campos_reqeridos = [
-            'nombre', 'apellido', 'correo', 'telefono', 'ciudad', 'sexo',
-            'carrera', 'universidad', 'semestre', 'fecha_graduacion',
-            'linkedin_url'
-        ]
-
-        for campo in campos_reqeridos:
-            if campo not in data or not data[campo]:
-                return JsonResponse({
-                    'success': False,
-                    'message': f'Campo requerido: {campo}'
-                }, status=400)
+        form = TalentRegistrationForm(request.POST, request.FILES)
         
-        #Crear el registro
-        talent = Talent.objects.create(
-            nombre=data['nombre'],
-            apellido=data['apellido'],
-            correo=data['correo'],
-            telefono=data['telefono'],
-            ciudad=data['ciudad'],
-            sexo=data['sexo'],
-            carrera=data['carrera'],
-            universidad=data['universidad'],
-            semestre=int(data['semestre']),
-            fecha_graduacion=data['fecha_graduacion'],
-            linkedin_url=data['linkedin_url'],
-            github_url=data.get('github_url', ''),
-            nivel_ingles=data['nivel_ingles'],
-            acepta_datos=data.get('acepta_datos', False)
-        )
-
-        return JsonResponse({
-            'success': True,
-            'message': '¡Registro completaod exitosamente!',
-            'talent_id': talent.pk
-        })
-    
-    except json.JSONDecodeError:
-        return JsonResponse({
-            'success': False,
-            'message': 'Error: JSON inválido'
-        }, status=400)
+        if form.is_valid():
+            # Guarda los datos, el archivo CV y gestiona automáticamente las relaciones M2M (áreas e interés)
+            talent = form.save()
+            
+            return JsonResponse({
+                'success': True,
+                'message': '¡Registro completado con éxito!',
+                'talent_id': talent.pk
+            })
+        else:
+            # Si el formulario no pasa las validaciones (ej: el teléfono está mal o el correo ya existe)
+            # Extraemos el primer error para mostrarlo de forma amigable en el frontend
+            errores = form.errors.get_json_data()
+            primer_campo = list(errores.keys())[0]
+            mensaje_error = errores[primer_campo][0]['message']
+            
+            return JsonResponse({
+                'success': False,
+                'message': f'Error en el campo {primer_campo}: {mensaje_error}'
+            }, status=400)
+            
     except Exception as e:
         return JsonResponse({
             'success': False,
             'message': f'Error del servidor: {str(e)}'
         }, status=500)
 
-def registro_exitoso(request, pk):
-    """Página de confirmación después del registro"""
-    try:
-        talent = Talent.objects.get(pk=pk)
-        return render(request, 'talents/registro_exitoso.html', {'talent': talent})
-    except Talent.DoesNotExist:
-        return redirect('registro')
+def registro_exito(request):
+    """Renderiza la página de agradecimiento y confirmación de registro"""
+    return render(request, 'talents/exito.html')

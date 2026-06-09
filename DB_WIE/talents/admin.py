@@ -1,25 +1,25 @@
 from django.contrib import admin
 from .models import Talent, AreaInteres, TipoOportunidad
 
-@admin.registrer(Talent)
+@admin.register(Talent)
 class TalentAdmin(admin.ModelAdmin):
     list_display = ('nombre', 'apellido', 'correo', 'carrera', 'fecha_registro', 'nivel_ingles')
-    list_filter = ('carrera', 'nivel_ingles', 'semestre', 'area_interes', 'fecha_registro')
+    list_filter = ('carrera', 'nivel_ingles', 'semestre', 'areas_interes', 'fecha_registro')
     search_fields = ('nombre', 'apellido', 'correo', 'carrera', 'linkedin_url')
     readonly_fields = ('fecha_registro', 'actualizado_en')
 
     fieldsets = (
         ('Datos Personales', {
-            'field': ('nombre', 'apellido', 'correo', 'telefono', 'ciudad', 'sexo')
+            'fields': ('nombre', 'apellido', 'correo', 'telefono', 'ciudad', 'sexo')
         }),
         ('Datos Académicos', {
-            'field': ('carrera', 'universidad', 'semestre', 'fecha_graduacion')
+            'fields': ('carrera', 'universidad', 'semestre', 'fecha_graduacion')
         }),
         ('Datos Profesionales', {
             'fields': ('linkedin_url', 'github_url', 'nivel_ingles', 'areas_interes', 'tipo_oportunidad', 'cv')
         }),
         ('Consentimiento', {
-            'fields': ('acepta_datos')
+            'fields': ('acepta_datos',)
         }),
         ('Timestamps', {
             'fields': ('fecha_registro', 'actualizado_en'),
@@ -34,7 +34,7 @@ class TalentAdmin(admin.ModelAdmin):
 
 @admin.register(AreaInteres)
 class AreaInteresAdmin(admin.ModelAdmin):
-    list_display = ('nomnre', 'descripcion')
+    list_display = ('nombre', 'descripcion')
     search_fields = ('nombre',)
 
 @admin.register(TipoOportunidad)

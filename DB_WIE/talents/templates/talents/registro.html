@@ -1,0 +1,292 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WIE | Registro estudiantil</title>
+  <link rel="stylesheet" href="{% static 'talents/style.css' %}">
+</head>
+<body>
+
+  <div class="fondo-wrapper">
+    <svg class="engranaje-izq" stroke="currentColor" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z" />
+      <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+    </svg>
+
+    <svg class="atomo-der" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="50" cy="50" rx="48" ry="20"/>
+      <ellipse cx="50" cy="50" rx="48" ry="20" transform="rotate(60 50 50)"/>
+      <ellipse cx="50" cy="50" rx="48" ry="20" transform="rotate(120 50 50)"/>
+      <circle cx="50" cy="50" r="5" fill="currentColor"/>
+    </svg>
+
+    <svg class="engranaje-der" stroke="currentColor" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z" />
+      <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+    </svg>
+  </div>
+
+  <div class="logo-barra">
+    <img src="{% static 'talents/icons/Logo_CS_ESPOL.png' %}" alt="IEEE Computer Society" class="LogoCompSoc">
+    <img src="{% static 'talents/icons/LOGO_WIE_ESPOL.png' %}" alt="WIE ESPOL" class="LogoWiee">
+  </div>
+
+  <div class="form-card">
+    
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <div class="form-header">
+        <div class="form-header-icon">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+          </svg>
+        </div>
+        <div>
+          <h1>Registro estudiantil</h1>
+          <p>WIE Week 2026 ESPOL</p>
+        </div>
+      </div>
+
+      <div class="steps-bar">
+        <div class="steps-track">
+          <div class="step-item active" id="si-1">
+            <div class="step-circle" id="sc-1">1</div>
+            <div class="step-label">Datos personales</div>
+          </div>
+          <div class="step-item" id="si-2">
+            <div class="step-circle" id="sc-2">2</div>
+            <div class="step-label">Datos académicos</div>
+          </div>
+          <div class="step-item" id="si-3">
+            <div class="step-circle" id="sc-3">3</div>
+            <div class="step-label">Datos profesionales</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-body">
+
+        <div class="step-panel visible" id="panel-1">
+          <div class="section-card">
+            <div class="section-header">
+              <div class="section-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                </svg>
+              </div>
+              <span class="section-title">Datos personales</span>
+            </div>
+
+            <div class="grid-2">
+              <div class="field-wrapper">
+                <label class="field-label">Nombres <span class="req">*</span></label>
+                <input type="text" name="nombre" placeholder="Ej. Christian David" class="form-input nombre" required>
+              </div>
+              <div class="field-wrapper">
+                <label class="field-label">Correo electrónico <span class="req">*</span></label>
+                <input type="email" name="correo" placeholder="@gmail.com, @espol.edu.ec, etc." class="form-input correo" required>
+              </div>
+            </div>
+
+            <div class="grid-2">
+              <div class="field-wrapper">
+                <label class="field-label">Apellidos <span class="req">*</span></label>
+                <input type="text" name="apellido" placeholder="Ej. Olmedo Benítez" class="form-input apellido" required>
+              </div>
+              <div class="field-wrapper">
+                <label class="field-label">Teléfono <span class="req">*</span></label>
+                <input type="tel" name="telefono" placeholder="+593 091 234 5678" class="form-input telefono" required>
+              </div>
+            </div>
+
+            <div class="field-wrapper mb-0">
+              <label class="field-label">Ciudad de residencia <span class="req">*</span></label>
+              <input type="text" name="ciudad" placeholder="Ej. Guayaquil, Cuenca, etc." class="form-input ciudad" required>
+            </div>
+
+            <div class="field-wrapper campo-sexo">
+              <label class="field-label">Sexo <span class="req">*</span></label>
+              <select name="sexo" class="form-input sexo" required>
+                <option value="" disabled selected>Seleccione una opción</option>
+                <option value="masculino">Hombre</option>
+                <option value="femenino">Mujer</option>
+                <option value="otro">Otro</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-panel" id="panel-2">
+          <div class="section-card">
+            <div class="section-header">
+              <div class="section-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 14l9-5-9-5-9 5 9 5z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 14l6.16-3.422A12.083 12.083 0 0121 21H3a12.083 12.083 0 012.84-10.422L12 14z"/>
+                </svg>
+              </div>
+              <span class="section-title">Datos académicos</span>
+            </div>
+
+            <div class="field-wrapper">
+              <label class="field-label">Carrera <span class="req">*</span></label>
+              <input type="text" name="carrera" placeholder="Ej. Computación, Mecatrónica, etc." class="form-input carrera" required>
+            </div>
+            
+            <div class="field-wrapper">
+              <label class="field-label">Universidad <span class="req">*</span></label>
+              <input type="text" name="universidad" placeholder="Ej. ESPOL, Universidad de Cuenca, UPS..." class="form-input universidad" required>
+            </div>
+
+            <div class="field-wrapper">
+              <label class="field-label">Semestre que cursa <span class="req">*</span></label>
+              <select name="semestre" class="form-input semestre" required>
+                <option value="" disabled selected>Selecciona un semestre</option>
+                <option value="1">1er semestre</option>
+                <option value="2">2do semestre</option>
+                <option value="3">3er semestre</option>
+                <option value="4">4to semestre</option>
+                <option value="5">5to semestre</option>
+                <option value="6">6to semestre</option>
+                <option value="7">7mo semestre</option>
+                <option value="8">8vo semestre</option>
+                <option value="9">9no semestre</option>
+                <option value="10">10mo semestre</option>
+              </select>
+            </div>
+            <div class="field-wrapper mb-0">
+              <label class="field-label">Fecha estimada de graduación <span class="req">*</span></label>
+              <input type="date" name="fecha_graduacion" class="form-input fecha" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-panel" id="panel-3">
+          <div class="section-card">
+            <div class="section-header">
+              <div class="section-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
+              </div>
+              <span class="section-title">Datos profesionales</span>
+            </div>
+
+            <div class="field-wrapper">
+              <label class="field-label">Enlace al perfil de LinkedIn <span class="req">*</span></label>
+              <input type="url" name="linkedin_url" placeholder="URL a su perfil" class="form-input linkedin" required>
+            </div>
+            
+            <div class="field-wrapper">
+              <label class="field-label">Enlace al portafolio GitHub (Opcional)</label>
+              <input type="url" name="github_url" placeholder="https://github.com/usuario" class="form-input github">
+            </div>
+            
+            <div class="field-wrapper">
+              <label class="field-label">Nivel de inglés <span class="req">*</span></label>
+              <select name="nivel_ingles" class="form-input ingles" required>
+                <option value="" disabled selected>Seleccione su nivel</option>
+                <option value="basico">Básico</option>
+                <option value="intermedio">Intermedio</option>
+                <option value="avanzado">Avanzado</option>
+                <option value="fluido">Fluido / Nativo</option>
+              </select>
+            </div>
+
+            <div class="upload-area">
+              <label class="field-label">Áreas de interés <span class="req">*</span></label>
+              <div class="chips-group">
+                <input class="chip-input" type="checkbox" id="area-ia" name="areas_interes" value="1">
+                <label class="chip-label" for="area-ia">Inteligencia Artificial</label>
+
+                <input class="chip-input" type="checkbox" id="area-web" name="areas_interes" value="2">
+                <label class="chip-label" for="area-web">Desarrollo Web</label>
+
+                <input class="chip-input" type="checkbox" id="area-mobile" name="areas_interes" value="3">
+                <label class="chip-label" for="area-mobile">Desarrollo Mobile</label>
+
+                <input class="chip-input" type="checkbox" id="area-data" name="areas_interes" value="4">
+                <label class="chip-label" for="area-data">Data Science</label>
+
+                <input class="chip-input" type="checkbox" id="area-cyber" name="areas_interes" value="5">
+                <label class="chip-label" for="area-cyber">Ciberseguridad</label>
+
+                <input class="chip-input" type="checkbox" id="area-otro" name="areas_interes" value="6" onchange="toggleOtroInput(this)">
+                <label class="chip-label" for="area-otro">Otro</label>
+              </div>
+              <div class="otro-input-wrapper" id="otro-input-wrapper">
+                <input type="text" class="form-input" id="area-otro-texto" placeholder="¿Cuál es tu área de interés?">
+              </div>
+            </div>
+
+            <div class="upload-area">
+              <label class="field-label">Tipo de oportunidad buscada <span class="req">*</span></label>
+              <div class="chips-group">
+                <input class="chip-input" type="checkbox" id="op-pasantia" name="tipo_oportunidad" value="1">
+                <label class="chip-label" for="op-pasantia">Pasantías</label>
+                
+                <input class="chip-input" type="checkbox" id="op-medio" name="tipo_oportunidad" value="2">
+                <label class="chip-label" for="op-medio">Trabajo medio tiempo</label>
+                
+                <input class="chip-input" type="checkbox" id="op-full" name="tipo_oportunidad" value="3">
+                <label class="chip-label" for="op-full">Jornada completa</label>
+              </div>
+            </div>
+
+            <div class="upload-area mb-0">
+              <label class="field-label">Adjuntar CV <span class="req">*</span></label>
+              <label for="cv-upload" class="btn-upload">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"/>
+                </svg>
+                Adjuntar archivo
+              </label>
+              <input type="file" id="cv-upload" name="cv" accept=".pdf,.doc,.docx" style="display:none" required>
+              <span id="cv-name" class="cv-filename"></span>
+            </div>
+
+            <div style="margin-top:20px;">
+              <label style="display:flex; gap:10px; align-items:center; cursor:pointer;">
+                <input type="checkbox" id="acepta-datos" name="acepta_datos" class="acepta-datos" required>
+                <span class="texto-consentimiento">
+                  Autorizo el tratamiento de mis datos personales y profesionales
+                  para fines de reclutamiento, selección y contacto por parte de las
+                  empresas que patrocinan la WIE Week <span class="req">*</span>
+                </span>
+              </label>
+            </div>
+
+            <div class="estadoEnvio">
+              <p class="textoSalida"></p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn btn-secondary" id="btn-back" onclick="goBack()" disabled>
+          ← Anterior
+        </button>
+        <span class="step-counter" id="step-counter">Paso 1 de 3</span>
+        <button type="button" class="btn btn-primary" id="btn-next" onclick="goNext()">
+          Siguiente →
+        </button>
+      </div>
+
+    </form>
+
+  </div>
+
+  <script src="{% static 'talents/script.js' %}"></script>
+</body>
+</html>

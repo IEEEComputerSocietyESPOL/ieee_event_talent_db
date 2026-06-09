@@ -51,9 +51,9 @@ class Talent(models.Model):
 
     #Archivo CV
     cv = models.FileField(
-        upload_to='cvs/%T/%m/%d/',
+        upload_to='cvs/%Y/%m/%d/', 
         validators=[FileExtensionValidator(allowed_extensions=['pdf', 'doc', 'docx'])]
-    )    
+    ) 
 
     #Consentimiento
     acepta_datos = models.BooleanField(default=False)
@@ -74,12 +74,20 @@ class AreaInteres(models.Model):
     nombre = models.CharField(max_length=100, unique=True)
     descripcion = models.TextField(blank=True)
 
+    class Meta:
+        verbose_name = "Área de Interés"
+        verbose_name_plural = "Áreas de Interés"
+
     def __str__(self):
         return self.nombre
 
 class TipoOportunidad(models.Model):
     nombre = models.CharField(max_length=100, unique=True)
     descripcion = models.TextField(blank=True)
+
+    class Meta:
+        verbose_name = "Tipo de Oportunidad"
+        verbose_name_plural = "Tipos de Oportunidades"
 
     def __str__(self):
         return self.nombre
