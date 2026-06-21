@@ -3,6 +3,11 @@
 ¡Bienvenido al repositorio oficial del **Sistema de Registro de Talentos** desarrollado para la **WIE Week** en colaboración con el **IEEE Computer Society ESPOL Student Chapter**!
 
 Este sistema web interactivo por pasos (Multi-step Form) permite a los estudiantes registrar sus perfiles profesionales, áreas de interés técnico, enlaces de LinkedIn/GitHub y adjuntar su CV en formato PDF. El backend está construido sobre **Django**, procesando las solicitudes de forma asíncrona mediante **AJAX (Fetch API)** para garantizar una experiencia de usuario rápida, fluida y segura.
+# 🚀 Sistema de Registro de Talentos - WIE Week ESPOL
+
+¡Bienvenido al repositorio oficial del **Sistema de Registro de Talentos** desarrollado para la **WIE Week** en colaboración con el **IEEE Computer Society ESPOL Student Chapter**!
+
+Este sistema web interactivo por pasos (Multi-step Form) permite a los estudiantes registrar sus perfiles profesionales, áreas de interés técnico, enlaces de LinkedIn/GitHub y adjuntar su CV en formato PDF. El backend está construido sobre **Django**, procesando las solicitudes de forma asíncrona mediante **AJAX (Fetch API)** para garantizar una experiencia de usuario rápida, fluida y segura.
 
 ---
 
@@ -152,3 +157,18 @@ Una vez completada la configuración de los catálogos, el sistema está **100% 
 | `talents/static/talents/script.js` | Orquesta las validaciones del cliente, gestiona los estados de los pasos del formulario (Paso 1, 2 y 3), renderiza el nombre del PDF cargado y ejecuta la petición asíncrona al servidor. |
 
 ---
+
+## 📊 Entrega de Datos a Sponsors
+
+El proyecto integra nativamente el módulo de reportes ejecutivos mediante **`django-import-export`**.
+
+Al ingresar al panel `/admin/` y seleccionar la tabla de **Talentos**, los organizadores dispondrán de un botón **"Exportar"** que permite descargar la nómina completa en formatos listos para consumo corporativo:
+
+- **Excel (`.xlsx`)**
+- **CSV**
+
+La exportación incluye enlaces directos a los currículums y datos de contacto de forma automatizada.
+
+---
+
+*Desarrollado con dedicación por el equipo tecnológico de la FIEC - ESPOL. 2026.*
